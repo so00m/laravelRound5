@@ -2,11 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
+use App\Http\Controllers\ClientController;
 
-Route::get('test20', [MyController::class,'my_data']);
+
+//practice 14 // 3rd session
+
+// Route::post('insertclient', [Clientcontroller::class,'store'])->name('insertclient');
+// Route::get('clientForm', [Clientcontroller::class, 'create'])  ;
 
 
-Route::get('/', function () { return view('welcome');});
+
+//Route::get('/', function () { return view('welcome');});
 
 //practice 1 :
 
@@ -85,13 +91,15 @@ Route::get('form1', function () {            //بتروح لصفحة الفور�
 
 //practice 12 :
                                                 //لما ندوس submit
-Route::post('reqform1', function () {        //  مننساش الpost method  بنستلم بيها البيانات من الفورم 
-    //return 'data recieved';
-    return view('form1Data'); 
-})->name('recieveform1');                    //  من الافضل  اسم الروت دا يتكتب ف الاكشن بدل ال يو ار ال
+// Route::post('reqform1', function () {        //  مننساش الpost method  بنستلم بيها البيانات من الفورم 
+//     //return 'data recieved';
+// })->name('recieveform1');                    //  من الافضل  اسم الروت دا يتكتب ف الاكشن بدل ال يو ار ال
+
+Route::post('reqform1', [MyController::class,'recieveData'])->name('recieveform1');
 
 
-
+//practice 13 :
+Route::get('test20', [MyController::class,'my_data']); //calling a method my_data from class controller called mycontroller
 
 
 
