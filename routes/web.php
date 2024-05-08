@@ -3,13 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\StudentController;
+
+//session3task
+Route::get('addStudent', [StudentController::class,'create']);            
+Route::post('insertstudent', [StudentController::class,'store'])->name('insertstudent');
 
 
 //practice 14 // 3rd session
-
-// Route::post('insertclient', [Clientcontroller::class,'store'])->name('insertclient');
-// Route::get('clientForm', [Clientcontroller::class, 'create'])  ;
-
+Route::get('clientForm', [Clientcontroller::class, 'create'])  ;
+Route::post('insertclient', [Clientcontroller::class,'store'])->name('insertclient');
 
 
 //Route::get('/', function () { return view('welcome');});
