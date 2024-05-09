@@ -11,9 +11,9 @@ Route::post('insertstudent', [StudentController::class,'store'])->name('insertst
 
 
 //practice 14 // 3rd session
-Route::get('clientForm', [Clientcontroller::class, 'create'])  ;
+Route::get('addClient', [Clientcontroller::class, 'create'])->name('addClient')  ;
 Route::post('insertclient', [Clientcontroller::class,'store'])->name('insertclient');
-
+Route::get('clients', [Clientcontroller::class,'index'])->name('clients');
 
 //Route::get('/', function () { return view('welcome');});
 
