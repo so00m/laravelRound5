@@ -5,14 +5,14 @@ use App\Http\Controllers\MyController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StudentController;
 
-//session3task
-Route::get('addStudent', [StudentController::class,'create']);            
+//student table routes
 Route::post('insertstudent', [StudentController::class,'store'])->name('insertstudent');
+Route::get('addStudent', [StudentController::class,'create'])->name('addStudent');            
+Route::get('students', [StudentController::class,'index'])->name('students');
 
-
-//practice 14 // 3rd session
-Route::get('addClient', [Clientcontroller::class, 'create'])->name('addClient')  ;
+//client table routes
 Route::post('insertclient', [Clientcontroller::class,'store'])->name('insertclient');
+Route::get('addClient', [Clientcontroller::class, 'create'])->name('addClient')  ;
 Route::get('clients', [Clientcontroller::class,'index'])->name('clients');
 
 //Route::get('/', function () { return view('welcome');});
