@@ -15,8 +15,11 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Student Name</th>
+            <th>Name</th>
             <th>Age</th>
+            <th>Edit</th>
+            <th>Show</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -24,6 +27,16 @@
             <tr>
               <td>{{$student->studentName}}</td>
               <td>{{$student->age}}</td>
+              <td><a href="{{ route('editStudent',$student->id)}}">Edit</a></td>
+              <td><a href="{{ route('showStudent',$student->id)}}">show</a></td>
+              <td>
+                <form action="{{ route('deleteStudent') }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                  <input type="hidden" value="{{$student->id}}" name="id" >
+                  <input type="submit" onclick="confirm('Are you sure?')" value="Delete">
+                </form> 
+              </td>
             </tr>
           @endforeach
         </tbody> 

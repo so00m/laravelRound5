@@ -9,7 +9,10 @@ use App\Http\Controllers\StudentController;
 Route::post('insertstudent', [StudentController::class,'store'])->name('insertstudent');
 Route::get('addStudent', [StudentController::class,'create'])->name('addStudent');            
 Route::get('students', [StudentController::class,'index'])->name('students');
-
+Route::get('editStudents/{id}', [StudentController::class, 'edit'])->name('editStudent');
+Route::put('updateStudents/{id}', [StudentController::class, 'update'])->name('updateStudents');
+Route::get('showStudent/{id}', [StudentController::class, 'show'])->name('showStudent');
+Route::delete('deleteStudent', [StudentController::class, 'destroy'])->name('deleteStudent');
 
 //client table routes
 Route::post('insertclient', [Clientcontroller::class,'store'])->name('insertclient');
