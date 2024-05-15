@@ -10,10 +10,15 @@ Route::post('insertstudent', [StudentController::class,'store'])->name('insertst
 Route::get('addStudent', [StudentController::class,'create'])->name('addStudent');            
 Route::get('students', [StudentController::class,'index'])->name('students');
 
+
 //client table routes
 Route::post('insertclient', [Clientcontroller::class,'store'])->name('insertclient');
 Route::get('addClient', [Clientcontroller::class, 'create'])->name('addClient')  ;
 Route::get('clients', [Clientcontroller::class,'index'])->name('clients');
+Route::get('editClients/{id}', [Clientcontroller::class, 'edit'])->name('editClient');
+Route::put('updateClients/{id}', [Clientcontroller::class, 'update'])->name('updateClients');
+Route::get('showClient/{id}', [Clientcontroller::class, 'show'])->name('showClient');
+Route::delete('deleteClient', [Clientcontroller::class, 'destroy'])->name('deleteClient');
 
 //Route::get('/', function () { return view('welcome');});
 
