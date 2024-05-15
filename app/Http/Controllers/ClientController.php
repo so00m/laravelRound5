@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Client;
-use Illuminate\Http\RedirectResponse;
+
 
 class ClientController extends Controller
 {
@@ -75,7 +75,7 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id):RedirectResponse
+    public function update(Request $request, string $id)
     {
         Client::where('id',$id)->update($request->only($this->columns));
         return redirect('clients');
@@ -92,4 +92,28 @@ class ClientController extends Controller
         return redirect('clients');
         
     }
+
+     /**
+     * VIEW TRASHED
+     */
+    public function trash()
+    {
+
+        $trashed=Client::onlyTrashed()->get();
+        return view('trashClient' , compact('trashed'));
+        
+    }
+
+    /**
+     * Restore 
+     */
+    public function restore(string $id)
+    {
+        Client::where('id',$id)->restore();
+        return redirect('clients'); 
+    }
+
+
+
+
 }
