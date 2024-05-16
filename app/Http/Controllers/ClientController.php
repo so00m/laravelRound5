@@ -9,7 +9,7 @@ use App\Models\Client;
 class ClientController extends Controller
 {
 
-    private $columns=['clientName', 'phone','email','website'];
+   
 
     /**
      * Display a listing of the resource.
@@ -49,7 +49,13 @@ class ClientController extends Controller
         // $client->save();
         // return 'Inserted';
 
-        Client::create($request->only($this->columns));
+        $data =$request->validate([
+            'clientName'=>'required|max:100|min:5',
+            'phone'=>'required|min:11',
+            'email'=>'required|email:rfc',
+            'website'=>'required'
+             ]);
+        Client::create($data);
         return redirect('clients');
 
     }
@@ -92,6 +98,19 @@ class ClientController extends Controller
         return redirect('clients');
         
     }
+
+      /**
+     * Remove the specified resource from storage.
+     */
+    public function forceDelete(Request $request)
+    {
+
+        $id=$request->id;
+        Client::where('id',$id)->forceDelete();
+        return redirect('trashClient');
+        
+    }
+
 
      /**
      * VIEW TRASHED

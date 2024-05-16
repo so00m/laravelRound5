@@ -14,6 +14,7 @@ Route::put('updateStudents/{id}', [StudentController::class, 'update'])->name('u
 Route::get('showStudent/{id}', [StudentController::class, 'show'])->name('showStudent');
 Route::delete('deleteStudent', [StudentController::class, 'destroy'])->name('deleteStudent');
 
+
 //client table routes
 Route::post('insertclient', [Clientcontroller::class,'store'])->name('insertclient');
 Route::get('addClient', [Clientcontroller::class, 'create'])->name('addClient')  ;
@@ -24,7 +25,7 @@ Route::get('showClient/{id}', [Clientcontroller::class, 'show'])->name('showClie
 Route::delete('deleteClient', [Clientcontroller::class, 'destroy'])->name('deleteClient');
 Route::get('trashClient', [Clientcontroller::class,'trash'])->name('trashClient');
 Route::get('restoreClient/{id}', [Clientcontroller::class,'restore'])->name('restoreClient');
-
+Route::delete('forceDeleteClient', [Clientcontroller::class, 'forceDelete'])->name('forceDeleteClient');
 
 
 //Route::get('/', function () { return view('welcome');});

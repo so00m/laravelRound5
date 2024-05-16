@@ -20,8 +20,8 @@
             <th>Email</th>
             <th>Website</th>
             <th>restore</th>
-            <th>show</th>
-            <th>delete</th>
+           
+            <th>force delete</th>
           </tr>
         </thead>
         <tbody>
@@ -32,13 +32,13 @@
               <td>{{$client->email}}</td>
               <td>{{$client->website}}</td> 
               <td><a href="{{ route('restoreClient',$client->id)}}">restore</a></td>
-              <td><a href="{{ route('showClient',$client->id)}}">show</a></td>
+              
               <td>
-                <form action="{{ route('deleteClient') }}" method="post">
+                <form action="{{ route('forceDeleteClient') }}" method="post">
                     @csrf
                     @method('DELETE')
                   <input type="hidden" value="{{$client->id}}" name="id" >
-                  <input type="submit" onclick="confirm('Are you sure?')" value="Delete">
+                  <input type="submit" onclick="confirm('Do you want to delete it for ever!!')" value="force Delete">
 
                 </form> 
               </td>

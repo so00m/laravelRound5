@@ -13,13 +13,33 @@
       <h1>ADD CLIENT FORM </h1><br><br>
       <form action="{{ route('insertclient') }}" method="post" >
         @csrf 
-        <label for="fname">Client Name:</label>
+        <label for="clientName">Client Name:</label>
+        <p style="color:red">
+          @error('clientName')
+          {{ $message }}
+          @enderror
+        </p>
         <input type="text" id="clientName" name="clientName" class="form-control"><br>
-        <label for="lname">Phone:      </label>
+        <label for="phone">Phone:      </label>
+        <p style="color:red">
+          @error('phone')
+          {{ $message }}
+          @enderror
+        </p>
         <input type="text" id="phone" name="phone" class="form-control"><br>
-        <label for="lname">Email:      </label>
+        <label for="email">Email:      </label>
+        <p style="color:red">
+          @error('email')
+          {{ $message }}
+          @enderror
+        </p>
         <input type="text" id="email" name="email" class="form-control"><br>
-        <label for="lname">Website:    </label>
+        <label for="website">Website:    </label>
+        <p style="color:red">
+          @error('website')
+          {{ $message }}
+          @enderror
+        </p>
         <input type="text" id="website" name="website" class="form-control"><br><br>
         <input type="submit" value="New CLient">
        
