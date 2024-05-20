@@ -10,14 +10,24 @@
   <body>
     @include('includes.navStudent') 
     <div  class="container"  style="margin-left: 20px;">
-      <h1>Edit Student Information<</h1><br><br>
+      <h1>Edit Student form<</h1><br><br>
       <form action="{{ route('updateStudents' , $student->id ) }}" method="post" >
 
         @csrf 
         @method('put')
         <label for="studentName">Student name:</label><br>
+        <p style="color:red">
+          @error('studentName')
+          {{ $message }}
+          @enderror
+        </p>
         <input type="text" id="studentName" name="studentName"  class="form-control" value="{{$student->studentName}}"><br>
         <label for="age">Age:</label><br>
+        <p style="color:red">
+          @error('age')
+          {{ $message }}
+          @enderror
+        </p>
         <input type="text" id="age" name="age"  class="form-control" value="{{$student->age}}" ><br><br>
         <input type="submit" value="Update">
       </form> 

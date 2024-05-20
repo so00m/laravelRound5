@@ -1,6 +1,6 @@
 <html lang="en">
   <head>
-    <title>add students</title>
+    <title>Add students</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -14,8 +14,18 @@
       <form action="{{ route('insertstudent') }}" method="post" >        <!--بيروح للاسم البرمجي لروت بيروح لدالة في الكنترولر-->
         @csrf
         <label for="studentName">Student name:</label><br>
+        <p style="color:red">
+          @error('studentName')
+          {{ $message }}
+          @enderror
+        </p>
         <input type="text" id="studentName" name="studentName"  class="form-control"><br>
         <label for="age">Age:</label><br>
+        <p style="color:red">
+          @error('age')
+          {{ $message }}
+          @enderror
+        </p>
         <input type="text" id="age" name="age"  class="form-control"><br><br>
         <input type="submit" value="ADD NEW STUDENT">
       </form> 

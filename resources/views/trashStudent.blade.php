@@ -17,24 +17,22 @@
           <tr>
             <th>Name</th>
             <th>Age</th>
-            <th>Edit</th>
-            <th>Show</th>
-            <th>Delete</th>
+            <th>restore</th>
+            <th>force delete</th>
           </tr>
         </thead>
         <tbody>
-          @foreach($students as $student )
+          @foreach($trashed  as $student )
             <tr>
               <td>{{$student->studentName}}</td>
               <td>{{$student->age}}</td>
-              <td><a href="{{ route('editStudent',$student->id)}}">Edit</a></td>
-              <td><a href="{{ route('showStudent',$student->id)}}">show</a></td>
+              <td><a href="{{ route('restoreStudent',$student->id)}}">restore</a></td>
               <td>
-                <form action="{{ route('deleteStudent') }}" method="post">
+                <form action="{{ route('forceDeleteStudent') }}" method="post">
                     @csrf
                     @method('DELETE')
                   <input type="hidden" value="{{$student->id}}" name="id" >
-                  <input type="submit" onclick="return confirm('Are you sure?')" value="Delete">
+                  <input type="submit" onclick="return confirm('Do you want to delete it for ever!!')" value="force Delete">
                 </form> 
               </td>
             </tr>

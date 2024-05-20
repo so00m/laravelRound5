@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
-use Illuminate\Http\RedirectResponse;
+
 
 
 class StudentController extends Controller
 {
 
-    private $columns=['studentName', 'age'];
+   
 
     /**
      * Display a listing of the resource.
@@ -34,6 +34,12 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        $data =$request->validate([
+            'studentName'=>'required|max:100|min:5',
+            'age'=>'required|integer|max:2',
+             ]);
+
+
         //
         // $student= new Student();
         // $student->studentName =$request->input('studentName');
@@ -41,7 +47,7 @@ class StudentController extends Controller
         // $student->save();
         // return 'New student is inserted successfully';
       
-        Student::create($request->only($this->columns));
+        Student::create($data);
         return redirect('students');  
     }
 
@@ -66,7 +72,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id):RedirectResponse
+    public function update(Request $request, string $id)
     {
         Student::where('id',$id)->update($request->only($this->columns));
         return redirect('students');
@@ -81,4 +87,39 @@ class StudentController extends Controller
         Student::where('id',$id)->delete();
         return redirect('students');
     }
+
+
+      /**
+     * Remove the specified resource from storage.
+     */
+    public function forceDelete(Request $request)
+    {
+
+        $id=$request->id;
+        Student::where('id',$id)->forceDelete();
+        return redirect('trashStudent');
+    }
+
+    /**
+     * VIEW TRASHED
+     */
+    public function trash()
+    {
+
+        $trashed= Student::onlyTrashed()->get();
+        return view('trashStudent' , compact('trashed'));
+        
+    }
+
+      /**
+     * Restore 
+     */
+    public function restore(string $id)
+    {
+        Student::where('id',$id)->restore();
+        return redirect('students'); 
+    }
+
+
+
 }

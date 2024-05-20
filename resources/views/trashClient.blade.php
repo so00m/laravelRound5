@@ -20,7 +20,7 @@
             <th>Email</th>
             <th>Website</th>
             <th>restore</th>
-           
+            <th>Delete</th>
             <th>force delete</th>
           </tr>
         </thead>
@@ -38,7 +38,7 @@
                     @csrf
                     @method('DELETE')
                   <input type="hidden" value="{{$client->id}}" name="id" >
-                  <input type="submit" onclick="confirm('Do you want to delete it for ever!!')" value="force Delete">
+                  <input type="submit" onclick="return confirm('Do you want to delete it for ever!!')" value="force Delete">
 
                 </form> 
               </td>

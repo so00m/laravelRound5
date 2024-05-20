@@ -38,7 +38,7 @@
                     @csrf
                     @method('DELETE')
                   <input type="hidden" value="{{$client->id}}" name="id" >
-                  <input type="submit" onclick="confirm('Are you sure?')" value="Delete">
+                  <input type="submit" onclick="return confirm('Are you sure?')" value="Delete">
 
                 </form> 
               </td>
