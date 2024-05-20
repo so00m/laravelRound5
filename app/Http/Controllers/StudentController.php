@@ -36,10 +36,9 @@ class StudentController extends Controller
     {
         $data =$request->validate([
             'studentName'=>'required|max:100|min:5',
-            'age'=>'required|integer|max:2',
+            'age'=>'required|integer',
              ]);
-
-
+             
         //
         // $student= new Student();
         // $student->studentName =$request->input('studentName');
@@ -74,11 +73,16 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Student::where('id',$id)->update($request->only($this->columns));
+        //Student::where('id',$id)->update($request->only($this->columns));
+        $data =$request->validate([
+            'studentName'=>'required|max:100|min:5',
+            'age'=>'required|integer',
+             ]);
+        Student::where('id',$id)->update($data);
         return redirect('students');
     }
 
-    /**
+     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Request $request)
