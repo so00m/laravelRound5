@@ -6,6 +6,7 @@
     <title>{{$client->clientName}}</title>
 </head>
 <body>
+    <p><img src="{{ asset('assets/images/'. $client->image ) }}" alt=""></p>
     <h2><strong>Client :</strong>{{ $client->clientName}}</h2>
     <hr>
     <h2><strong>Phone :</strong>{{ $client->phone}}</h2>

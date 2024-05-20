@@ -11,7 +11,7 @@
     @include('includes.navClient') 
     <div  class="container"  style="margin-left: 20px;">
       <h1>ADD CLIENT FORM </h1><br><br>
-      <form action="{{ route('insertclient') }}" method="post" >
+      <form action="{{ route('insertclient') }}" method="post" enctype="multipart/form-data">
         @csrf 
         <label for="clientName">Client Name:</label>
         <p style="color:red">
@@ -19,30 +19,48 @@
           {{ $message }}
           @enderror
         </p>
-        <input type="text" id="clientName" name="clientName" class="form-control"><br>
+        <input type="text" id="clientName" name="clientName" class="form-control" value="{{ old('clientName') }}"><br>
         <label for="phone">Phone:      </label>
         <p style="color:red">
           @error('phone')
           {{ $message }}
           @enderror
         </p>
-        <input type="text" id="phone" name="phone" class="form-control"><br>
+        <input type="text" id="phone" name="phone" class="form-control"value="{{ old('phone') }}"><br>
         <label for="email">Email:      </label>
         <p style="color:red">
           @error('email')
           {{ $message }}
           @enderror
         </p>
-        <input type="text" id="email" name="email" class="form-control"><br>
+        <input type="text" id="email" name="email" class="form-control" value="{{ old('email') }}"><br>
         <label for="website">Website:    </label>
         <p style="color:red">
           @error('website')
           {{ $message }}
           @enderror
         </p>
-        <input type="text" id="website" name="website" class="form-control"><br><br>
-        <input type="submit" value="New CLient">
-       
+        <input type="text" id="website" name="website" class="form-control" value="{{ old('website') }}"><br><br>
+        <label for="city">City:</label><br>
+        <p style="color:red">
+          @error('city')
+          {{ $message }}
+          @enderror
+        </p>
+          <select name="city" id="city" class="form-control">
+          <option value="" >Please Select City</option>
+          <option value="Cairo" {{ old('city' ) == 'Cairo' ? 'selected' : '' }}>Cairo</option>
+          <option value="Giza" {{ old('city' ) =='Giza' ? 'selected' : '' }}>Giza</option>
+          <option value="Alex" {{ old('city' ) =='Alex' ? 'selected' : '' }}>Alex</option>
+       </select><br><br>
+
+        <label for="active">Active:</label><br>
+        <input type="checkbox" id="active" name="active" class="form-control" {{ old( 'active' ) ? 'checked' : '' }}><br><br>
+
+        <label for="image">image:</label><br>
+        <input type="file" id="image" name="image" class="form-control"><br><br>
+       <input type="submit" value="New CLient">
+
       </form> 
     </div>  
   </body>

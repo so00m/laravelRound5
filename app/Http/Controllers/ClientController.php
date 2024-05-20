@@ -9,8 +9,6 @@ use App\Models\Client;
 class ClientController extends Controller
 {
 
- 
-
     /**
      * Display a listing of the resource.
      */
@@ -49,12 +47,27 @@ class ClientController extends Controller
         // $client->save();
         // return 'Inserted';
 
+       
+
+        $messages= $this->errMsg();
+
         $data =$request->validate([
             'clientName'=>'required|max:100|min:5',
             'phone'=>'required|min:11',
             'email'=>'required|email:rfc',
-            'website'=>'required'
-             ]);
+            'website'=>'required',
+            'city'=>'required',
+            'image'=>'required',
+             ] , $messages);
+        
+        $imgExt=$request->image->getClientOriginalExtension();
+        $filename=time() . '-' . $imgExt;
+        $path='assets/images';
+        $request->image->move($path,$filename);
+        $data['image']=$filename;
+
+        
+        $data['active']=isset($request->active);
 
         Client::create($data);
         return redirect('clients');
@@ -147,6 +160,18 @@ class ClientController extends Controller
     {
         Client::where('id',$id)->restore();
         return redirect('clients'); 
+    }
+
+    //error msgs
+    public function errMsg()
+    {
+         return [
+            'clientName.required'=>'Name is missed !!',
+            'clientName.min'=>'length less than 5 !! please insert your full name ',
+            'phone.min'=>'length less than 11 !! please insert a valid phone number',
+            'email.email'=>'please insert a valid email ',
+            'city.required'=>'please select a city from the list'
+        ];
     }
 
 }
