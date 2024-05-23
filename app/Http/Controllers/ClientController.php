@@ -47,8 +47,6 @@ class ClientController extends Controller
         // $client->save();
         // return 'Inserted';
 
-       
-
         $messages= $this->errMsg();
 
         $data =$request->validate([
@@ -57,15 +55,14 @@ class ClientController extends Controller
             'email'=>'required|email:rfc',
             'website'=>'required',
             'city'=>'required',
-            'image'=>'required',
+            'image' => 'required|mimes:jpg,bmp,png',       
              ] , $messages);
         
         $imgExt=$request->image->getClientOriginalExtension();
-        $filename=time() . '-' . $imgExt;
+        $filename=time() . '-' . $imgExt;        
         $path='assets/images';
         $request->image->move($path,$filename);
         $data['image']=$filename;
-
         
         $data['active']=isset($request->active);
 
@@ -101,20 +98,25 @@ class ClientController extends Controller
                 'clientName'=>'required|max:100|min:5',
                 'phone'=>'required|min:11',
                 'email'=>'required|email:rfc',
-                'website'=>'required'
+                'website'=>'required',
+                'city'=>'required',
                 ]);
-
-        //return $data;
         
-        //  $client = Client::findOrFail($id);
-        //  $rowsUpdated = $client->update($data);
-        
-
+        if($request->hasFile('image')){
+            $data =$request->validate(['image'=>'mimes:jpg,bmp,png']);
+            $imgExt=$request->image->getClientOriginalExtension();
+            $filename=time() . '-' . $imgExt;        
+            $path='assets/images';
+            $request->image->move($path,$filename);
+            $data['image']=$filename;
+        }else{
+            $data['image'] = Client::where('id', $id)->value('image');
+        }
+            
+        $data['active']=isset($request->active);        
 
         Client::where('id',$id)->update($data);
         return redirect('clients');
-
-
     }
 
     /**
@@ -170,7 +172,9 @@ class ClientController extends Controller
             'clientName.min'=>'length less than 5 !! please insert your full name ',
             'phone.min'=>'length less than 11 !! please insert a valid phone number',
             'email.email'=>'please insert a valid email ',
-            'city.required'=>'please select a city from the list'
+            'city.required'=>'please select a city from the list',
+            'image.required'=>'please insert an image',
+            'image.mimes'=>'image extension must be jpg or png or bmp '
         ];
     }
 

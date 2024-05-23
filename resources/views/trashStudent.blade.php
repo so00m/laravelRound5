@@ -17,6 +17,9 @@
           <tr>
             <th>Name</th>
             <th>Age</th>
+            <th>Active</th>
+            <th>City</th>
+            <th>Img</th>
             <th>restore</th>
             <th>force delete</th>
           </tr>
@@ -26,6 +29,9 @@
             <tr>
               <td>{{$student->studentName}}</td>
               <td>{{$student->age}}</td>
+              <td>{{$student->active ? 'yes':'no'}}</td>
+              <td>{{$student->city}}</td>
+              <td>{{$student->image}}</td>
               <td><a href="{{ route('restoreStudent',$student->id)}}">restore</a></td>
               <td>
                 <form action="{{ route('forceDeleteStudent') }}" method="post">

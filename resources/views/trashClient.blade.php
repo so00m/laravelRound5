@@ -19,8 +19,10 @@
             <th>Phone</th>
             <th>Email</th>
             <th>Website</th>
+            <th>Active</th>
+            <th>City</th>
+            <th>Img</th>
             <th>restore</th>
-            <th>Delete</th>
             <th>force delete</th>
           </tr>
         </thead>
@@ -31,6 +33,9 @@
               <td>{{$client->phone}}</td>
               <td>{{$client->email}}</td>
               <td>{{$client->website}}</td> 
+              <td>{{$client->active ? 'yes':'no'}}</td>
+              <td>{{$client->city}}</td>
+              <td>{{$client->image}}</td>
               <td><a href="{{ route('restoreClient',$client->id)}}">restore</a></td>
               
               <td>
@@ -39,9 +44,9 @@
                     @method('DELETE')
                   <input type="hidden" value="{{$client->id}}" name="id" >
                   <input type="submit" onclick="return confirm('Do you want to delete it for ever!!')" value="force Delete">
-
                 </form> 
               </td>
+              
             </tr>
           @endforeach
         </tbody> 

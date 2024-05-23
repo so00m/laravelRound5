@@ -15,6 +15,10 @@
     <hr>
     <h2><strong>website :</strong>{{ $client->website}}</h2>
     <hr>
-    
+    <h2><strong>city:</strong>{{ $client->city}}</h2>
+    <hr>
+    <h2><strong>active :</strong>{{$client->active ? 'yes':'no'}}</h2>
+    <hr>
+   
 </body>
 </html>

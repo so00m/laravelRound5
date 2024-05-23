@@ -34,18 +34,30 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $data =$request->validate([
-            'studentName'=>'required|max:100|min:5',
-            'age'=>'required|integer',
-             ]);
-             
-        //
+           //
         // $student= new Student();
         // $student->studentName =$request->input('studentName');
         // $student->age = $request->input('age');
         // $student->save();
         // return 'New student is inserted successfully';
+            
+        $messages= $this->errMsg();
+
+        $data =$request->validate([
+            'studentName'=>'required|max:100|min:5',
+            'age'=>'required|integer',
+            'city'=>'required',
+            'image' => 'required|mimes:jpg,bmp,png',
+             ] , $messages);
       
+        $imgExt=$request->image->getClientOriginalExtension();
+        $filename=time() . '-' . $imgExt;
+        $path='assets/images';
+        $request->image->move($path,$filename);
+        $data['image']=$filename;
+
+        $data['active']=isset($request->active);
+
         Student::create($data);
         return redirect('students');  
     }
@@ -74,10 +86,28 @@ class StudentController extends Controller
     public function update(Request $request, string $id)
     {
         //Student::where('id',$id)->update($request->only($this->columns));
+        
+        $messages= $this->errMsg();
+
         $data =$request->validate([
             'studentName'=>'required|max:100|min:5',
             'age'=>'required|integer',
-             ]);
+            'city'=>'required',
+             ] , $messages);
+
+        if($request->hasFile('image')){
+            $data =$request->validate(['image'=>'mimes:jpg,bmp,png']);
+            $imgExt=$request->image->getClientOriginalExtension();
+            $filename=time() . '-' . $imgExt;        
+            $path='assets/images';
+            $request->image->move($path,$filename);
+            $data['image']=$filename;
+        }else{
+            $data['image'] = Student::where('id', $id)->value('image');
+        }
+
+        $data['active']=isset($request->active);
+
         Student::where('id',$id)->update($data);
         return redirect('students');
     }
@@ -124,6 +154,18 @@ class StudentController extends Controller
         return redirect('students'); 
     }
 
+   //error msgs
+    public function errMsg()
+    {
+         return [
+            'studentName.required'=>'Name is missed !!',
+            'studentName.min'=>'length less than 5 !! please insert your full name ',
+            'age.required'=>'please insert your age',
+            'city.required'=>'please select a city from the list',
+            'image.required'=>'please insert an image',
+            'image.mimes'=>'image extension must be jpg or png or bmp '
+        ];
+    }
 
 
 }
