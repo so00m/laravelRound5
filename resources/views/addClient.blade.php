@@ -64,7 +64,7 @@
           {{ $message }}
           @enderror
         </p>
-        <input type="file" id="image" name="image" class="form-control"><br><br>
+        <input type="file" id="image" name="image" class="form-control"  ><br><br>
         <input type="submit" value="New CLient">
 
       </form> 

@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Client;
-
+use App\Traits\UploadFile;
 
 class ClientController extends Controller
 {
 
+    use UploadFile;
     /**
      * Display a listing of the resource.
      */
@@ -58,12 +59,9 @@ class ClientController extends Controller
             'image' => 'required|mimes:jpg,bmp,png',       
              ] , $messages);
         
-        $imgExt=$request->image->getClientOriginalExtension();
-        $filename=time() . '-' . $imgExt;        
-        $path='assets/images';
-        $request->image->move($path,$filename);
-        $data['image']=$filename;
-        
+        $fileName=$this->upload($request->image , 'assets/images');
+        $data['image']=$fileName;
+
         $data['active']=isset($request->active);
 
         Client::create($data);
@@ -100,19 +98,21 @@ class ClientController extends Controller
                 'email'=>'required|email:rfc',
                 'website'=>'required',
                 'city'=>'required',
+                'image'=>'sometimes',
                 ]);
         
+
         if($request->hasFile('image')){
             $data =$request->validate(['image'=>'mimes:jpg,bmp,png']);
-            $imgExt=$request->image->getClientOriginalExtension();
-            $filename=time() . '-' . $imgExt;        
-            $path='assets/images';
-            $request->image->move($path,$filename);
-            $data['image']=$filename;
-        }else{
-            $data['image'] = Client::where('id', $id)->value('image');
+            $fileName=$this->upload($request->image , 'assets/images');    //newFolder
+            $data['image']=$fileName;
         }
+        
+        // else{
+        //     $data['image'] = Client::where('id', $id)->value('image');
+        // }
             
+
         $data['active']=isset($request->active);        
 
         Client::where('id',$id)->update($data);
@@ -165,7 +165,7 @@ class ClientController extends Controller
     }
 
     //error msgs
-    public function errMsg()
+    public function errMsg() 
     {
          return [
             'clientName.required'=>'Name is missed !!',

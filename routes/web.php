@@ -31,7 +31,9 @@ Route::get('restoreClient/{id}', [Clientcontroller::class,'restore'])->name('res
 Route::delete('forceDeleteClient', [Clientcontroller::class, 'forceDelete'])->name('forceDeleteClient');
 
 
-//Route::get('/', function () { return view('welcome');});
+
+//
+Route::get('/stacked', function () { return view('stacked');});
 
 //practice 1 :
 
@@ -104,8 +106,8 @@ Route::delete('forceDeleteClient', [Clientcontroller::class, 'forceDelete'])->na
     
 //practice 11 :
 
-Route::get('form1', function () {            //بتروح لصفحة الفورم
-    return view ('form1');
+Route::get('/', function () {            //بتروح لصفحة الفورم
+    return view ('stacked');
  });
 
 //practice 12 :
@@ -119,6 +121,3 @@ Route::post('reqform1', [MyController::class,'recieveData'])->name('recieveform1
 
 //practice 13 :
 Route::get('test20', [MyController::class,'my_data']); //calling a method my_data from class controller called mycontroller
-
-
-
