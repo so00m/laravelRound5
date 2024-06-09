@@ -29,9 +29,9 @@ class ClientFactory extends Factory
                 'phone' => fake()->phoneNumber(),
                 'email' => fake()->unique()->safeEmail(),
                 'website' => fake()->url(),
-                'city' =>  fake()->randomElement(['Cairo','Giza','Alex']),
+                'city_id' =>  fake()->numberBetween(1,20),
                 'image' => fake()->image(null, 640, 480),
-                'active' => rand(0, 1),
+                'active' => fake()->numberBetween(0,1),
                 'address' =>  fake()->streetAddress(),
         ];
     }

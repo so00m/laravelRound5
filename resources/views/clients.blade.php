@@ -35,7 +35,7 @@
               <td>{{$client->email}}</td>
               <td>{{$client->website}}</td> 
               <td>{{$client->active ? 'yes':'no'}}</td>
-              <td>{{$client->city}}</td>
+              <td>{{$client->city->city}}</td>
               <td>{{$client->image}}</td>
               <td><a href="{{ route('editClient',$client->id)}}">Edit</a></td>
               <td><a href="{{ route('showClient',$client->id)}}">show</a></td>

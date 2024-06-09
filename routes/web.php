@@ -34,6 +34,7 @@ Route::delete('forceDeleteClient', [Clientcontroller::class, 'forceDelete'])->na
 
 //
 Route::get('/stacked', function () { return view('stacked');});
+Route::get('showCategory/{id}', [MyController::class, 'showCategory']);
 
 //practice 1 :
 
@@ -106,9 +107,9 @@ Route::get('/stacked', function () { return view('stacked');});
     
 //practice 11 :
 
-Route::get('/', function () {            //بتروح لصفحة الفورم
-    return view ('stacked');
- });
+//Route::get('/', function () {            //بتروح لصفحة الفورم
+//     return view ('stacked');
+//  });
 
 //practice 12 :
                                                 //لما ندوس submit

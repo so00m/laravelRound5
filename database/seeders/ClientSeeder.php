@@ -1,14 +1,13 @@
 <?php
 
 namespace Database\Seeders;
+//use Illuminate\Support\Facades\Hash;    //to make the passwords hashed 
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\Client;
-
-//use Illuminate\Support\Facades\Hash;    //to make the passwords hashed 
 
 
 class ClientSeeder extends Seeder
@@ -18,7 +17,9 @@ class ClientSeeder extends Seeder
      */
     public function run(): void
     {
-
+        //**// factory method
+                Client::factory(10)->create();
+                
         // DB::table('users')->insert([
         //     'name' => Str::random(10),
         //     'email' => Str::random(10).'@example.com',
@@ -39,9 +40,6 @@ class ClientSeeder extends Seeder
         // ]);
 
 
-//**// factory method
-
-        Client::factory(5)->create();
 
         
     }

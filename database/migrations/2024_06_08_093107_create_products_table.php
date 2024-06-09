@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\City;
 
 return new class extends Migration
 {
@@ -12,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('clientName', 100);
-            $table->string('phone', 25);
-            $table->string('email', 100);
-            $table->string('website', 100);
-            $table->foreignId('city_id')->constrained('cities');
+            $table->string('productName', 50);
+            $table->decimal('price', 10 ,2);
+            $table->string('discription', 100);
             $table->string('image', 100);
-            $table->boolean('active');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('products');
     }
 };

@@ -7,6 +7,7 @@
 </head>
 <body>
     <p><img src="{{ asset('assets/images/'. $client->image ) }}" alt=""></p>
+    
     <h2><strong>Client :</strong>{{ $client->clientName}}</h2>
     <hr>
     <h2><strong>Phone :</strong>{{ $client->phone}}</h2>
@@ -15,7 +16,7 @@
     <hr>
     <h2><strong>website :</strong>{{ $client->website}}</h2>
     <hr>
-    <h2><strong>city:</strong>{{ $client->city}}</h2>
+    <h2><strong>city:</strong>{{ $client->city->city}}</h2>   <!--$client->(method name from client model)->(coulumn name)-->
     <hr>
     <h2><strong>active :</strong>{{$client->active ? 'yes':'no'}}</h2>
     <hr>
