@@ -5,6 +5,12 @@ use App\Http\Controllers\MyController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StudentController;
 
+
+Route::get('/', function () {          
+    return view ('welcome');
+ });
+
+
 //student table routes
 Route::post('insertstudent', [StudentController::class,'store'])->name('insertstudent');
 Route::get('addStudent', [StudentController::class,'create'])->name('addStudent');            
@@ -118,8 +124,12 @@ Route::get('showProfile/{id}', [MyController::class, 'showProfile']);
 //     //return 'data recieved';
 // })->name('recieveform1');                    //  من الافضل  اسم الروت دا يتكتب ف الاكشن بدل ال يو ار ال
 
-Route::post('reqform1', [MyController::class,'recieveData'])->name('recieveform1');
+// Route::post('reqform1', [MyController::class,'recieveData'])->name('recieveform1');
 
 
-//practice 13 :
-Route::get('test20', [MyController::class,'my_data']); //calling a method my_data from class controller called mycontroller
+// //practice 13 :
+// Route::get('test20', [MyController::class,'my_data']); //calling a method my_data from class controller called mycontroller
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
