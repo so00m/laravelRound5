@@ -23,7 +23,7 @@
 
     <h2>Orders:</h2>
 
-    <!--show orders -->
+    <!--show  all orders -->
 
     <table class="table table-hover">
 
