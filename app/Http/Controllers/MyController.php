@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Profile;
+use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -18,34 +19,22 @@ class MyController extends Controller
         $lname= $request->lname;
         //return $fname .$lname ;   //غير شائع الطريقة دي
         return view('form1Data' , compact('fname' ,'lname' ));  //دالة كومباكت بتبعت البيانات دي للفيو اللي انا حددته
-    }
+         }
 
     public function showCategory(string $id)
-    {
+        {
         $category=Category::findOrFail($id);
         
         $products = $category->products()->get();
        
         return view('showCategory', compact('category' ,'products'));
-
-
-          //$products=ProductCategory::where('category_id',$id)->get();
-    
-       
-            //$productIds = ProductCategory::where('category_id', $id)->pluck('product_id');
-    
-          
-          //  $products = $category->products->get();
-    
-            
-        
         }
 
-
-
-
-
-
+    public function showProfile(string $id)
+        {
+            $admin=Admin::findOrFail($id);
+            return view('showProfile', compact('admin'));
+        }
 
     }
 

@@ -35,6 +35,7 @@ Route::delete('forceDeleteClient', [Clientcontroller::class, 'forceDelete'])->na
 //
 Route::get('/stacked', function () { return view('stacked');});
 Route::get('showCategory/{id}', [MyController::class, 'showCategory']);
+Route::get('showProfile/{id}', [MyController::class, 'showProfile']);
 
 //practice 1 :
 

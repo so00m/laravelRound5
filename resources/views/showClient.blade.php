@@ -20,6 +20,21 @@
     <hr>
     <h2><strong>active :</strong>{{$client->active ? 'yes':'no'}}</h2>
     <hr>
-   
+
+    <h2>Orders:</h2>
+
+    <!--show orders -->
+
+    <table class="table table-hover">
+
+        @foreach ($client->order as $order )
+            
+            <tr>
+                <td>{{ $order->total_amount }}</td>
+                <td>{{ $order->order_date }}</td>
+                
+            </tr>
+        @endforeach
+    </table>
 </body>
 </html>
