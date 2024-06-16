@@ -1,9 +1,21 @@
 <?php
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\EmailController;
+
+
+
+Auth::routes(['verify'=>true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
+
+
+//mail hog
+Route::get('/send-email', [EmailController::class, 'sendEmail']);
+
 
 
 Route::get('/', function () {          
@@ -14,7 +26,7 @@ Route::get('/', function () {
 //student table routes
 Route::post('insertstudent', [StudentController::class,'store'])->name('insertstudent');
 Route::get('addStudent', [StudentController::class,'create'])->name('addStudent');            
-Route::get('students', [StudentController::class,'index'])->name('students');
+Route::get('students', [StudentController::class,'index'])->middleware('verified')->name('students');
 Route::get('editStudents/{id}', [StudentController::class, 'edit'])->name('editStudent');
 Route::put('updateStudents/{id}', [StudentController::class, 'update'])->name('updateStudents');
 Route::get('showStudent/{id}', [StudentController::class, 'show'])->name('showStudent');
@@ -27,7 +39,7 @@ Route::delete('forceDeleteStudent', [Studentcontroller::class, 'forceDelete'])->
 //client table routes
 Route::post('insertclient', [Clientcontroller::class,'store'])->name('insertclient');
 Route::get('addClient', [Clientcontroller::class, 'create'])->name('addClient')  ;
-Route::get('clients', [Clientcontroller::class,'index'])->name('clients');
+Route::get('clients', [Clientcontroller::class,'index'])->middleware('verified')->name('clients');
 Route::get('editClients/{id}', [Clientcontroller::class, 'edit'])->name('editClient');
 Route::put('updateClients/{id}', [Clientcontroller::class, 'update'])->name('updateClients');
 Route::get('showClient/{id}', [Clientcontroller::class, 'show'])->name('showClient');
@@ -38,10 +50,25 @@ Route::delete('forceDeleteClient', [Clientcontroller::class, 'forceDelete'])->na
 
 
 
-//
+//stack 
 Route::get('/stacked', function () { return view('stacked');});
+
+
+//relations
 Route::get('showCategory/{id}', [MyController::class, 'showCategory']);
 Route::get('showProfile/{id}', [MyController::class, 'showProfile']);
+
+
+//session routes
+Route::get('mysession', [MyController::class, 'myVal']);
+Route::get('restoresession', [MyController::class, 'restoreVal']);
+Route::get('deletesession', [MyController::class, 'deleteVal']);
+
+//sending email to client
+
+Route::get('sendemails', [MyController::class,'sendClientmail']);
+
+
 
 //practice 1 :
 
@@ -130,6 +157,6 @@ Route::get('showProfile/{id}', [MyController::class, 'showProfile']);
 // //practice 13 :
 // Route::get('test20', [MyController::class,'my_data']); //calling a method my_data from class controller called mycontroller
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//this after--> bootstrap package 
+

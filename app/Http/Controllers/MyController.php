@@ -7,9 +7,32 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use App\mail\ContactClient;
+use App\Models\Client;
+use Illuminate\Support\Facades\Mail;
 
 class MyController extends Controller
 {
+
+    public function myVal() {
+       // session()->put('test','my first session');
+        session()->flash('test1','my first session');
+        return 'session created';
+    }
+
+    public function restoreVal() {
+                return 'my session value is  : ' . session('test1');
+    }
+
+    public function deleteVal() {
+        //session()->forget('test');
+        session()->flush();
+
+        return 'session removed';
+
+    }
+
+
     public function my_data() {
         return view('test');
     }
@@ -35,6 +58,17 @@ class MyController extends Controller
             $admin=Admin::findOrFail($id);
             return view('showProfile', compact('admin'));
         }
+
+    public function sendClientmail()
+        {
+            $data=Client::findOrFail(2)->toArray();
+            $data['theMessage']='my message content here';
+            // dd($data);
+            Mail::to($data['email'])->send(new ContactClient($data));
+            return 'mail sent!';
+            
+        }
+
 
     }
 
