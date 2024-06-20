@@ -35,8 +35,8 @@ Route::get('trashStudent', [Studentcontroller::class,'trash'])->name('trashStude
 Route::get('restoreStudent/{id}', [Studentcontroller::class,'restore'])->name('restoreStudent');
 Route::delete('forceDeleteStudent', [Studentcontroller::class, 'forceDelete'])->name('forceDeleteStudent');
 
-
 //client table routes
+
 Route::post('insertclient', [Clientcontroller::class,'store'])->name('insertclient');
 Route::get('addClient', [Clientcontroller::class, 'create'])->name('addClient')  ;
 Route::get('clients', [Clientcontroller::class,'index'])->middleware('verified')->name('clients');
@@ -47,6 +47,8 @@ Route::delete('deleteClient', [Clientcontroller::class, 'destroy'])->name('delet
 Route::get('trashClient', [Clientcontroller::class,'trash'])->name('trashClient');
 Route::get('restoreClient/{id}', [Clientcontroller::class,'restore'])->name('restoreClient');
 Route::delete('forceDeleteClient', [Clientcontroller::class, 'forceDelete'])->name('forceDeleteClient');
+
+
 
 
 
@@ -160,3 +162,4 @@ Route::get('sendemails', [MyController::class,'sendClientmail']);
 
 //this after--> bootstrap package 
 
+// require_once base_path('routes/user.php');
