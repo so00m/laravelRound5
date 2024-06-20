@@ -68,7 +68,7 @@ class MyController extends Controller
             return 'mail sent!';
             
         }
-
+        
 
     }
 

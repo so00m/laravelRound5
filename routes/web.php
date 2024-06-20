@@ -5,8 +5,7 @@ use App\Http\Controllers\MyController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmailController;
-
-
+use App\Http\Controllers\MailFromClientController;
 
 Auth::routes(['verify'=>true]);
 
@@ -16,6 +15,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->midd
 //mail hog
 Route::get('/send-email', [EmailController::class, 'sendEmail']);
 
+
+//session 13 task
+Route::get('/contactus',[MailFromClientController::class, 'create'])->name('contactUs');
+Route::post('/sendmail',[MailFromClientController::class, 'storeAndSend'])->name('sendmail');
 
 
 Route::get('/', function () {          
