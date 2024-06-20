@@ -41,12 +41,12 @@ class LoginController extends Controller
 
     public function credentials(Request $request)
     {
-        if (filter_var($request->username, FILTER_VALIDATE_EMAIL)) {
+        if (filter_var($request->name, FILTER_VALIDATE_EMAIL)) {
             
-            return ['email' => $request->username, 'password' => $request->password];
+            return ['email' => $request->name, 'password' => $request->password];
         } else {
             
-            return ['username' => $request->username, 'password' => $request->password];
+            return ['name' => $request->name, 'password' => $request->password];
         }
     }
         
