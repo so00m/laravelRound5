@@ -10,6 +10,10 @@
       <li><a href="{{route ('trashClient')}}">trashed</a></li>
       @yield('menu')
       @stack('submenu')
-    </ul>  
+    </ul> 
+    <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{ LaravelLocalization::getLocalizedURL('en')}}">English</a></li>
+    <li><a href="{{ LaravelLocalization::getLocalizedURL('ar')}}">العربية</a></li>
+    </ul> 
   </div>
 </nav>

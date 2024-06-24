@@ -7,9 +7,17 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\MailFromClientController;
 
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+
+
+
 Auth::routes(['verify'=>true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 //mail hog
@@ -42,7 +50,7 @@ Route::delete('forceDeleteStudent', [Studentcontroller::class, 'forceDelete'])->
 
 Route::post('insertclient', [Clientcontroller::class,'store'])->name('insertclient');
 Route::get('addClient', [Clientcontroller::class, 'create'])->name('addClient')  ;
-Route::get('clients', [Clientcontroller::class,'index'])->middleware('verified')->name('clients');
+Route::get('clients', [Clientcontroller::class,'index'])->name('clients');
 Route::get('editClients/{id}', [Clientcontroller::class, 'edit'])->name('editClient');
 Route::put('updateClients/{id}', [Clientcontroller::class, 'update'])->name('updateClients');
 Route::get('showClient/{id}', [Clientcontroller::class, 'show'])->name('showClient');
@@ -166,3 +174,6 @@ Route::get('sendemails', [MyController::class,'sendClientmail']);
 //this after--> bootstrap package 
 
 // require_once base_path('routes/user.php');
+
+
+});
