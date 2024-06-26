@@ -3,17 +3,15 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\User;
 
-class Expiration extends Command
-
+class DatabaseBackup extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'user:expiration';
+    protected $signature = 'app:database-backup';
 
     /**
      * The console command description.
@@ -27,10 +25,6 @@ class Expiration extends Command
      */
     public function handle()
     {
-        $users = User::where('expired', 0)->get();
-        foreach($users as $user){
-        $user->update(['expired'=>1]);
-        }
-
+        //
     }
 }

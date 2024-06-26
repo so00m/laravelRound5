@@ -39,15 +39,15 @@ class LoginController extends Controller
         $this->middleware('auth')->only('logout');
     }
 
-    public function credentials(Request $request)
-    {
-        if (filter_var($request->name, FILTER_VALIDATE_EMAIL)) {
+    // public function credentials(Request $request)
+    // {
+    //     if (filter_var($request->name, FILTER_VALIDATE_EMAIL)) {
             
-            return ['email' => $request->name, 'password' => $request->password];
-        } else {
+    //         return ['email' => $request->name, 'password' => $request->password];
+    //     } else {
             
-            return ['name' => $request->name, 'password' => $request->password];
-        }
-    }
+    //         return ['name' => $request->name, 'password' => $request->password];
+    //     }
+    // }
         
 }
