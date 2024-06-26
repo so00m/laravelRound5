@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+
 use Illuminate\Support\Facades\Schedule;
 
 
@@ -13,4 +14,4 @@ Artisan::command('inspire', function () {
 
 Schedule::command('user:expiration')->everySecond();
 
-Schedule::command('db:backup')->everyday();
+Schedule::command('laravelr5:backup')->daily();

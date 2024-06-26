@@ -165,6 +165,9 @@ return [
             'database' => env('REDIS_CACHE_DB', '1'),
         ],
 
+
+        'dump_command_path' => '/path/to/mysql/bin/mysqldump',
+
     ],
 
 ];
