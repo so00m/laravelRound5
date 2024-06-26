@@ -12,3 +12,5 @@ Artisan::command('inspire', function () {
 
 
 Schedule::command('user:expiration')->everySecond();
+
+Schedule::command('db:backup')->everyday();
